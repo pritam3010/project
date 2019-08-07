@@ -13,109 +13,119 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles(theme => ({
-  formBox: {
-    marginTop: theme.spacing(14),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    formBox: {
+        marginTop: theme.spacing(14),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+    },
+    form: {
+        width: "100%",
+        marginTop: theme.spacing(1)
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2)
+    }
 }));
 
 const renderTextField = ({ input, ...customs }) => (
-  <TextField {...input} {...customs} />
+    <TextField {...input} {...customs} />
 );
 const renderCheckBox = ({ input, label, ...customs }) => (
-  <FormControlLabel
-    control={
-      <Checkbox
-        {...customs}
-        checked={input.value ? true : false}
-        onChange={input.onChange}
-      />
-    }
-    label={label}
-  />
+    <FormControlLabel
+        control={
+            <Checkbox
+                {...customs}
+                checked={input.value ? true : false}
+                onChange={input.onChange}
+            />
+        }
+        label={label}
+    />
 );
 
 const LogInForm = props => {
-  const classes = useStyles();
-  const { handleSubmit } = props;
-  const onSubmit = formValues => {
-    console.log(formValues);
-    props.onSubmit(formValues);
-  };
+    const classes = useStyles();
+    const { handleSubmit } = props;
+    const onSubmit = formValues => {
+        props.onSubmit(formValues);
+    };
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.formBox}>
-        <Typograhpy component="h1" variant="h5">
-          Log In
-        </Typograhpy>
-        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-          <Field
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            name="email"
-            label="Email"
-            placeholder="Enter your email"
-            type="email"
-            autoFocus
-            component={renderTextField}
-          />
-          <Field
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="password"
-            name="password"
-            label="Password"
-            placeholder="Enter your password"
-            type="password"
-            component={renderTextField}
-          />
-          <Field
-            name="remember"
-            label="Remember me"
-            color="primary"
-            component={renderCheckBox}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Continue to dashboard
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link variant="body2" component={routerLink} to="/login">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link variant="body2" component={routerLink} to="/register">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
-  );
+    return (
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.formBox}>
+                <Typograhpy component="h1" variant="h5">
+                    Log In
+                </Typograhpy>
+                <form
+                    className={classes.form}
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    <Field
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        name="email"
+                        label="Email"
+                        placeholder="Enter your email"
+                        type="email"
+                        autoFocus
+                        component={renderTextField}
+                    />
+                    <Field
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="password"
+                        name="password"
+                        label="Password"
+                        placeholder="Enter your password"
+                        type="password"
+                        component={renderTextField}
+                    />
+                    <Field
+                        name="remember"
+                        label="Remember me"
+                        color="primary"
+                        component={renderCheckBox}
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Continue to dashboard
+                    </Button>
+                    <Grid container>
+                        <Grid item xs>
+                            <Link
+                                variant="body2"
+                                component={routerLink}
+                                to="/login"
+                            >
+                                Forgot password?
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Link
+                                variant="body2"
+                                component={routerLink}
+                                to="/register"
+                            >
+                                {"Don't have an account? Sign Up"}
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </form>
+            </div>
+        </Container>
+    );
 };
 
 export default reduxForm({ form: "login" })(LogInForm);
